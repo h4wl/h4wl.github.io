@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sample form submission for /u/tomomiha12</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Pixel Code for https://app.tinyanalytics.io/ -->
+    <script defer src="https://app.tinyanalytics.io/pixel/YorVIn2DRqQRCBSf"></script>
+    <!-- END Pixel Code -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+    
+      function SampleForm() {
+        return <>
+            <h1>Basic Submission</h1>
+            <form action="/api/fake" method="post">
+                <div>
+                    <label for="name">Enter your name: </label>
+                    <input type="text" name="name" />
+                </div>
+                <div>
+                    <label for="email">Enter your email: </label>
+                    <input type="email" name="email" />
+                </div>
+                <div>
+                    <input type="submit" value="Subscribe!" />
+                </div>
+            </form>
+        </>;
+      }
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+      root.render(<SampleForm />);
+
+    </script>
+  </body>
+</html>
