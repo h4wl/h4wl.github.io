@@ -34,7 +34,6 @@
           setShowLastNameError(!lastNameIsValid);
           
           if (firstNameIsValid && lastNameIsValid) {
-            console.log("test");
             fetch('/api/fake', { method: form.method, body: formData });
           }
 
