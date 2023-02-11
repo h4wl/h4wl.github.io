@@ -17,9 +17,24 @@
     <script type="text/babel">
     
       function SampleForm() {
+        function handleSubmit(e) {
+        // Prevent the browser from reloading the page
+        e.preventDefault();
+
+        // Read the form data
+        const form = e.target;
+        const formData = new FormData(form);
+
+        // You can pass formData as a fetch body directly:
+        fetch('/api/fake', { method: form.method, body: formData });
+
+        // Or you can work with it as a plain object:
+        const formJson = Object.fromEntries(formData.entries());
+        console.log(formJson);
+      }
         return <>
-            <h1>Sample form submission for /u/tomomiha12</h1>
-            <form action="/api/fake" method="post">
+        <h1>Sample form submission for /u/tomomiha12 using Fetch</h1>
+            <form method="post" onSubmit={handleSubmit}>
                 <div>
                     <label>First Name: 
                         <input name="firstName" />    

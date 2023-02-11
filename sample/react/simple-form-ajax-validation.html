@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sample form submission for /u/tomomiha12</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Pixel Code for https://app.tinyanalytics.io/ -->
+    <script defer src="https://app.tinyanalytics.io/pixel/YorVIn2DRqQRCBSf"></script>
+    <!-- END Pixel Code -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+    
+      function SampleForm() {
+        const [firstName, setFirstName] = React.useState('Hello');
+        const [lastName, setLastName] = React.useState('');
+        const [showFirstNameError, setShowFirstNameError] = React.useState(false);
+        const [showLastNameError, setShowLastNameError] = React.useState(false);
+
+        function handleSubmit(e) {
+          e.preventDefault();
+          const form = e.target;
+          const formData = new FormData(form);
+          
+          const firstNameIsValid = firstName.length > 0; 
+          const lastNameIsValid = lastName.length > 0;
+
+          setShowFirstNameError(!firstNameIsValid);
+          setShowLastNameError(!lastNameIsValid);
+          
+          if (firstNameIsValid && lastNameIsValid) {
+            console.log("test");
+            fetch('/api/fake', { method: form.method, body: formData });
+          }
+
+          
+        }
+
+        return <>
+          <h1>Sample form submission for /u/tomomiha12 using Fetch with basic validation</h1>
+            <form method="post" onSubmit={handleSubmit}>
+                <div>
+                    <label>First Name: 
+                        <input name="firstName" value={firstName} onChange={e => setFirstName(e.target.value)} />    
+                    </label>
+                    
+                </div>
+                
+                {showFirstNameError && 
+                  <div>
+                    First Name is required!  
+                  </div>
+                }
+                
+                <div>
+                    <label>Last Name: 
+                        <input name="lastName" value={lastName} onChange={e => setLastName(e.target.value)} />    
+                    </label>
+                </div>
+                
+                {showLastNameError && 
+                  <div>
+                    Last Name is required!  
+                  </div>
+                }
+
+                <div>
+                    <input type="submit" value="Post It" />
+                </div>
+            </form>
+        </>;
+      }
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+      root.render(<SampleForm />);
+
+    </script>
+  </body>
+</html>
