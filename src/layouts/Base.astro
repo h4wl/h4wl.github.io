@@ -1,0 +1,48 @@
+---
+import { SITE } from '../site';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = SITE.description } = Astro.props;
+const pageTitle = title ? `${title} · ${SITE.title}` : `${SITE.name} · ${SITE.title}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.title} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- Pixel Code for https://app.tinyanalytics.io/ (carried over from the old site) -->
+    <script is:inline defer src="https://app.tinyanalytics.io/pixel/YorVIn2DRqQRCBSf"></script>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap"><a class="brand" href="/">dhb.dev</a></div>
+    </header>
+    <main class="wrap">
+      <slot />
+    </main>
+    <footer class="site">
+      <div class="wrap">© {new Date().getFullYear()} {SITE.name}</div>
+    </footer>
+  </body>
+</html>
